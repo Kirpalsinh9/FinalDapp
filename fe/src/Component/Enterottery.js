@@ -17,6 +17,7 @@ export default class Enterottery extends Component {
             Error: "",
             getid: "",
             loading: false
+
         }
         this.handlechange = this.handlechange.bind(this)
         this.handlesubmit = this.handlesubmit.bind(this)
@@ -80,7 +81,8 @@ export default class Enterottery extends Component {
         let contract = new ethers.Contract(address, abi, signer);
         let newid = await contract.TotalLottery()
         this.setState({
-            getid: newid.toString()
+            getid: newid.toString(),
+
         })
     }
     render() {
@@ -88,7 +90,7 @@ export default class Enterottery extends Component {
         return (
             <div >
                 <h1> Bet in Existing Lottery</h1>
-                <button onClick={this.handleButton}> Get LotteryId!!</button>
+                <button onClick={this.handleButton} > Get LotteryId!!</button>
                 {this.state.getid !== "" ? <p>Current Lottery is:{this.state.getid}</p> : ""}
 
                 <form onSubmit={this.handlesubmit}  >

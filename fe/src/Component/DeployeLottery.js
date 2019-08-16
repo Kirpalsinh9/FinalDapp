@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ethers } from 'ethers';
 import '../index.css'
 import firebase from 'firebase';
+import Loader from 'react-loader-spinner';
 const abi = require('../abi');
 
 export default class DeployeLottery extends Component {
@@ -14,7 +15,8 @@ export default class DeployeLottery extends Component {
             getid: "",
             Message: "",
             Error: "",
-            openid: ""
+            openid: "",
+            loading: false
         }
         this.handlechange = this.handlechange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -28,7 +30,9 @@ export default class DeployeLottery extends Component {
     }
     handleSubmit = async (e) => {
         e.preventDefault();
-
+        this.setState({
+            loading: true
+        })
         let eth = window.ethereum;
         let add = await eth.enable()
         let provider = new ethers.providers.Web3Provider(window.web3.currentProvider);
@@ -54,7 +58,8 @@ export default class DeployeLottery extends Component {
         this.setState({
             owner: "",
             id: "",
-            name: ""
+            name: "",
+            loading: false
         })
     }
     handleButton = async (e) => {
@@ -97,13 +102,19 @@ export default class DeployeLottery extends Component {
         }
     }
     render() {
+        const loading = this.state.loading
         return (
             <div>
                 <h2>Deploye New Lottery</h2>
                 <form>
                     <input type="text" name="name" onChange={this.handlechange} value={this.state.name} />
                     <br />
-                    <button onClick={this.handleSubmit}> Deploy!!!!! </button>
+                    <button onClick={this.handleSubmit}>{this.state.loading === true ? <Loader
+                        type="Puff"
+                        color="white"
+                        height="30"
+                        width="30"
+                    /> : ""} Deploy!!!!! </button>
 
                 </form>
                 <br />
