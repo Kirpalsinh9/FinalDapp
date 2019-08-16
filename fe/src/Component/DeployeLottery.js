@@ -9,8 +9,7 @@ export default class DeployeLottery extends Component {
     constructor() {
         super()
         this.state = {
-            id: "",
-            owner: "",
+
             name: "",
             getid: "",
             Message: "",
@@ -42,22 +41,15 @@ export default class DeployeLottery extends Component {
         let contract = new ethers.Contract(address, abi, signer);
         await contract.NewLottery();
 
-        let newid = await contract.TotalLottery()
-        console.log(newid.toString());
-        this.setState({
-            owner: add.toString(),
-            id: newid.toString()
-        })
+
 
         const db = firebase.firestore();
         db.collection("lottery").add({
-            owner: this.state.owner,
-            id: this.state.id,
+            owner: add.toString(),
+
             name: this.state.name
         })
         this.setState({
-            owner: "",
-            id: "",
             name: "",
             loading: false
         })
@@ -73,9 +65,11 @@ export default class DeployeLottery extends Component {
         let address = '0x53d31e46faa0f7203d3c5a237dd6305020e4e120'
         let contract = new ethers.Contract(address, abi, signer);
         let newid = await contract.TotalLottery()
+
         this.setState({
             getid: newid.toString()
         })
+
     }
     handlestate = async (e) => {
         e.preventDefault();
@@ -109,7 +103,7 @@ export default class DeployeLottery extends Component {
                 <form>
                     <input type="text" name="name" onChange={this.handlechange} value={this.state.name} />
                     <br />
-                    <button onClick={this.handleSubmit}>{this.state.loading === true ? <Loader
+                    <button onClick={this.handleSubmit} disabled={loading}>{this.state.loading === true ? <Loader
                         type="Puff"
                         color="white"
                         height="30"

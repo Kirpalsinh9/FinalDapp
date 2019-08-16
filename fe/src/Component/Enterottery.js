@@ -16,6 +16,7 @@ export default class Enterottery extends Component {
             Amount: "",
             Error: "",
             getid: "",
+            Message: "",
             loading: false
 
         }
@@ -56,6 +57,7 @@ export default class Enterottery extends Component {
                     Region: "",
                     Amount: "",
                     Error: "",
+                    Message: "You have successfully entered in lottery.",
                     loading: false
                 }
 
@@ -64,7 +66,7 @@ export default class Enterottery extends Component {
         } catch (error) {
             console.log(error.message);
             this.setState({
-                Error: "Owner Can't bet."
+                Error: "Owner Can't bet or this lottery is closed."
             })
         }
         //console.log(txreceipt);
@@ -123,6 +125,7 @@ export default class Enterottery extends Component {
                         BET!!!!</button>
                     <br />
                 </form>
+                {this.state.Message !== "" ? <p>{this.state.Message}</p> : ""}
                 {this.state.Error !== "" ? <p>{this.state.Error}</p> : ""}
             </div>
         )
