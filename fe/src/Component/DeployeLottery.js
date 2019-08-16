@@ -30,7 +30,7 @@ export default class DeployeLottery extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
         this.setState({
-            //loading: true
+            loading: true
         })
         let eth = window.ethereum;
         let add = await eth.enable()

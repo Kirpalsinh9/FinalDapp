@@ -31,7 +31,7 @@ export default class Enterottery extends Component {
     handlesubmit = async (e) => {
         e.preventDefault();
         this.setState({
-            //loading: true
+            loading: true
         })
         let eth = window.ethereum;
         let playeraddress = await eth.enable()
