@@ -29,7 +29,7 @@ export default class PickWinner extends Component {
     handlesubmit = async (e) => {
         e.preventDefault();
         this.setState({
-            loading: true
+            // loading: true
         })
         let eth = window.ethereum;
         await eth.enable()
